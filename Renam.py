@@ -14,17 +14,6 @@ while  True:
             
         
         if userInput == 'Exit' or userInput == 'exit':
-            tvSeriesName = re.search('(.+[S|s][0-9]+)', finalNewName).group()
-            dirOldName = os.path.basename(pathForRenameDir)
-            dirNewPath = pathForRenameDir.replace(dirOldName, tvSeriesName)
-            if pathForRenameDir == dirNewPath:
-                print('\nNo Need To Rename The Folder.')
-            elif str(input('\nDo you Want Do Rename The Whole Folder Type yes if Yes: ')) == 'yes':
-                try:
-                    os.rename(pathForRenameDir,dirNewPath)
-                    print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > \n', tvSeriesName)
-                except:
-                    None
             print('\n\n\nExiting...\nGoodBye.')
             break
         else:
@@ -90,7 +79,22 @@ while  True:
 
                     else:
                         exit
-                
+                if findNameandSEandType:
+                    try:
+                        tvSeriesName = re.search('(.+[S|s][0-9]+)', finalNewName).group()
+                        dirOldName = os.path.basename(pathForRenameDir)
+                        dirNewPath = pathForRenameDir.replace(dirOldName, tvSeriesName)
+
+                        if pathForRenameDir == dirNewPath:
+                            print('\nNo Need To Rename The Folder.')
+                        elif str(input('\nDo you Want Do Rename The Whole Folder Type yes if Yes: ')) == 'yes' or 'Yes':
+                            try:
+                                os.rename(pathForRenameDir, dirNewPath)
+                                print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > \n', tvSeriesName)
+                            except:
+                                None
+                    except:
+                        None
             except:
                 print('You did Not Enter a Path !! Please Try Again !!!!\nYou Can Type Exit To Exit The Program.')
             print('\nFinish..\n\n\n\n\n')
