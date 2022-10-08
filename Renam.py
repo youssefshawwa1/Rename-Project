@@ -10,24 +10,37 @@ import os, re, shutil
 print('You Can Type Exit To Exit The Program.\n')
 userHelp = 'This Program Created By Youssef Shawwa\n First you have to Choose What You Are Renamin\nOptions: \nTV Series Seasons Type: tv\n Movies Type: movies'
 while  True:
-        userInput = str(input('Enter Folder Path: '))
+        userInput = str(input('Enter Folder Path or Exit To Exit: '))
+            
         
         if userInput == 'Exit' or userInput == 'exit':
+            tvSeriesName = re.search('(.+[S|s][0-9]+)', finalNewName).group()
+            dirOldName = os.path.basename(pathForRenameDir)
+            dirNewPath = pathForRenameDir.replace(dirOldName, tvSeriesName)
+            if pathForRenameDir == dirNewPath:
+                print('\nNo Need To Rename The Folder.')
+            elif str(input('\nDo you Want Do Rename The Whole Folder Type yes if Yes: ')) == 'yes':
+                try:
+                    os.rename(pathForRenameDir,dirNewPath)
+                    print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > \n', tvSeriesName)
+                except:
+                    None
             print('\n\n\nExiting...\nGoodBye.')
             break
-        # elif userInput == 'tv' or userInput == 'TV' or userInput == 'Tv':
         else:
             try:
                 #enter the path of a dir contains files 
                 #example of path F:\Hawkeye
                 #(excpectig video and subtitles in the dir)
                 path =   userInput + '\\'
+                pathForRenameDir = userInput
                 filesDir = os.listdir(path) 
                 group = []
                 #loob in the dir and find all the files in it
                 for file in filesDir:
                     #find out if the file is a video or subtitle
                     findNameandSEandType = re.findall('(.+)([S|s][0-9]+[E|e][0-9]+).*(.mp4$|.mkv$|.srt$)', file)
+                    
                     #if subtitle or video rename it to a new name
                     if findNameandSEandType:
                         finalNewName = str(findNameandSEandType[0][0]).title().replace('.', ' ') + str(findNameandSEandType[0][1]).upper()+ str(findNameandSEandType[0][2])
@@ -77,6 +90,7 @@ while  True:
 
                     else:
                         exit
+                
             except:
                 print('You did Not Enter a Path !! Please Try Again !!!!\nYou Can Type Exit To Exit The Program.')
             print('\nFinish..\n\n\n\n\n')
