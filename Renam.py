@@ -71,22 +71,20 @@ while  True:
                                     print('****Just Deleted:  ', thing)
                                 #if not 
                                 except:
-                                    #try as a not emty folder 
+                                    #try as not an emty folder 
                                     try:
                                         shutil.rmtree(path + thing, ignore_errors=True)
                                         print('****Just Deleted:  ', thing)
                                     #if not print messige to the user
                                     except:
                                         print('Error Can Not Delete:   ', thing)
-
-                    else:
-                        None
                 if findNameandSEandType:
                     try:
                         if varForCounting <= 2:
                             tvSeriesName = re.search('(.+)([S|s][0-9]+[E|e][0-9]+)', finalNewName).group()
                             dirOldName = os.path.basename(pathForRenameDir)
                             dirNewPath = pathForRenameDir.replace(dirOldName, tvSeriesName)
+                            varForCounting = 0
                         else:
                             tvSeriesName = re.search('(.+[S|s][0-9]+)', finalNewName).group()
                             dirOldName = os.path.basename(pathForRenameDir)
@@ -120,7 +118,6 @@ while  True:
                                     print('Error Can Not Rename:   ', dirOldName)
                     except:
                         print('Error Can Not Rename Folder.')
-                    varForCounting = 0
             except:
                 print('You did Not Enter a Path !! Please Try Again !!!!\nYou Can Type Exit To Exit The Program.')
             print('\nFinish..\n\n\n\n\n')
