@@ -9,6 +9,7 @@ import os, re, shutil
 # import shutil
 print('You Can Type Exit To Exit The Program.\n')
 userHelp = 'This Program Created By Youssef Shawwa\n First you have to Choose What You Are Renamin\nOptions: \nTV Series Seasons Type: tv\n Movies Type: movies'
+varForCounting = 0 
 while  True:
         userInput = str(input('Enter Folder Path or Exit To Exit: '))
             
@@ -32,6 +33,7 @@ while  True:
                     
                     #if subtitle or video rename it to a new name
                     if findNameandSEandType:
+                        varForCounting += 1
                         finalNewName = str(findNameandSEandType[0][0]).title().replace('.', ' ') + str(findNameandSEandType[0][1]).upper()+ str(findNameandSEandType[0][2])
                         if path + file == path + finalNewName:
                             print('No Need To Rename:   ', file)
@@ -78,23 +80,47 @@ while  True:
                                         print('Error Can Not Delete:   ', thing)
 
                     else:
-                        exit
+                        None
                 if findNameandSEandType:
                     try:
-                        tvSeriesName = re.search('(.+[S|s][0-9]+)', finalNewName).group()
-                        dirOldName = os.path.basename(pathForRenameDir)
-                        dirNewPath = pathForRenameDir.replace(dirOldName, tvSeriesName)
+                        if varForCounting <= 2:
+                            tvSeriesName = re.search('(.+)([S|s][0-9]+[E|e][0-9]+)', finalNewName).group()
+                            dirOldName = os.path.basename(pathForRenameDir)
+                            dirNewPath = pathForRenameDir.replace(dirOldName, tvSeriesName)
+                        else:
+                            tvSeriesName = re.search('(.+[S|s][0-9]+)', finalNewName).group()
+                            dirOldName = os.path.basename(pathForRenameDir)
+                            dirNewPath = pathForRenameDir.replace(dirOldName, tvSeriesName)
+
 
                         if pathForRenameDir == dirNewPath:
                             print('\nNo Need To Rename The Folder.')
-                        elif str(input('\nDo you Want Do Rename The Whole Folder Type yes if Yes: ')) == 'yes' or 'Yes':
+                        elif str(input('\nDo you Want Do Rename The Whole Folder Type yes if Yes: ')) == 'yes':
                             try:
                                 os.rename(pathForRenameDir, dirNewPath)
                                 print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > \n', tvSeriesName)
                             except:
-                                None
+                                try:
+                                    i = 0 
+                                    while i <= 10:
+                                        try:
+                                            randomN = '.' + str(i)
+                                            
+                                            if pathForRenameDir == dirNewPath + randomN:
+                                                print('\nNo Need To Rename The Folder.')
+                                                break
+                                            else:
+                                                os.rename(pathForRenameDir, dirNewPath + randomN)
+                                                print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > \n', tvSeriesName + randomN)
+                                                break
+                                        except:
+                                            i += 1
+                                            continue
+                                except:
+                                    print('Error Can Not Rename:   ', dirOldName)
                     except:
-                        None
+                        print('Error Can Not Rename Folder.')
+                    varForCounting = 0
             except:
                 print('You did Not Enter a Path !! Please Try Again !!!!\nYou Can Type Exit To Exit The Program.')
             print('\nFinish..\n\n\n\n\n')
