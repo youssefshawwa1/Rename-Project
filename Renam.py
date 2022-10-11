@@ -14,7 +14,7 @@ while  True:
         userInput = str(input('Enter Folder Path or Exit To Exit: '))
             
         
-        if userInput == 'Exit' or userInput == 'exit':
+        if len(userInput) < 1 or userInput == 'Exit' or userInput == 'exit':
             print('\n\n\nExiting...\nGoodBye.')
             break
         else:
@@ -30,6 +30,8 @@ while  True:
                 for file in filesDir:
                     #find out if the file is a video or subtitle
                     findNameandSEandType = re.findall('(.+)([S|s][0-9]+[E|e][0-9]+).*(.mp4$|.mkv$|.srt$)', file)
+                    findMovie =  re.findall("(.*)([(0-9]{4})[.| ].*(.mp4$|.mkv$|.srt$)", file)
+
                     
                     #if subtitle or video rename it to a new name
                     if findNameandSEandType:
@@ -45,7 +47,18 @@ while  True:
                             except:
                                 print('Error Can Not Rename:   ', file)
                     #if not a video or subtitle put it in a list named group
-                    elif not findNameandSEandType: 
+                    elif findMovie:
+                        finalNewName = str(findMovie[0][0]).title().replace('.', ' ') + str(findMovie[0][1]) + str(findMovie[0][2])
+                        if path + file == path + finalNewName:
+                            print('No Need To Rename:   ', file)
+                            continue
+                        else:
+                            try:
+                                os.rename(path + file, path + finalNewName)
+                                print('Just Renamed:    ', file, '   To >  ',finalNewName )
+                            except:
+                                print('Error Can Not Rename:   ', file)
+                    else: 
                         group.append(file)
                 #if there was any thing not a video or subtitle 
                 if group:
