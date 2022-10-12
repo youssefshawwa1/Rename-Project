@@ -30,7 +30,7 @@ while  True:
                 for file in filesDir:
                     #find out if the file is a video or subtitle
                     findNameandSEandType = re.findall('(.+)([S|s][0-9]+[E|e][0-9]+).*(.mp4$|.mkv$|.srt$)', file)
-                    findMovie =  re.findall("(.*)([(0-9]{4})[.| ].*(.mp4$|.mkv$|.srt$)", file)
+                    findMovie =  re.findall("(.*)([(0-9]{4})[.| ].*(mp4$|mkv$|srt$)", file)
 
                     
                     #if subtitle or video rename it to a new name
@@ -48,7 +48,7 @@ while  True:
                                 print('Error Can Not Rename:   ', file)
                     #if not a video or subtitle put it in a list named group
                     elif findMovie:
-                        finalNewName = str(findMovie[0][0]).title().replace('.', ' ') + str(findMovie[0][1]) + str(findMovie[0][2])
+                        finalNewName = str(findMovie[0][0]).title().replace('.', ' ') + str(findMovie[0][1]) + '.' + str(findMovie[0][2])
                         if path + file == path + finalNewName:
                             print('No Need To Rename:   ', file)
                             continue
