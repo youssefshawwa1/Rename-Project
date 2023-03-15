@@ -78,7 +78,7 @@ def ReMovDelCon(settings):
                                     # if the name ends with srt it 
                                     # will automatically convert the file to vtt
                                     SRT2VTT(path, finalNewName)
-                                    print('Just Renamed:    ', file, '   To >  ',finalNewName )
+                                    print('Just Renamed:    ', file, '\nTo >  ',finalNewName )
                                 except:
                                     # if there was a problem with renaming 
                                     print('Error Can Not Rename:   ', file)
@@ -108,7 +108,7 @@ def ReMovDelCon(settings):
                                 try:
                                     os.rename(path + file, path + finalNewName)
                                     SRT2VTT(path, finalNewName)
-                                    print('Just Renamed:    ', file, '   To >  ',finalNewName )
+                                    print('Just Renamed:    ', file, '\nTo >  ',finalNewName )
                                 except:
                                     print('Error Can Not Rename:   ', file)
                         # if there is an image then take the name of the image
@@ -186,7 +186,7 @@ def ReMovDelCon(settings):
                                     # else rename the folder
                                     else:
                                         os.rename(pathForRenameDir, dirNewPath)
-                                        print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > \n', tvSeriesName)
+                                        print('\n\n\nJust Renamed Folder: ', dirOldName, '\nTo > ', tvSeriesName)
                                     # here is the main path is wher the program will 
                                     # move the final tv sereis to it
                                     mainPath = dirNewPath.replace(tvSeriesName, '')
@@ -225,7 +225,7 @@ def ReMovDelCon(settings):
                                             # then move it 
                                             else:
                                                 shutil.move(dirNewPath, main + tvName[0][0] + '\\' + tvSeriesName)
-                                                print('\n\n\nJust Moved Folder: ', dirNewPath.replace('/', '\\'), 'To > \n', main.replace('/', '\\') + tvName[0][0] + '\\' + tvSeriesName)
+                                                print('\n\n\nJust Moved Folder: ', dirNewPath.replace('/', '\\'), '\nTo > ', main.replace('/', '\\') + tvName[0][0] + '\\' + tvSeriesName)
                                         except:
                                             print('Error With Moving:    ')
                                     # if ther wasn't folder named the same then
@@ -237,7 +237,7 @@ def ReMovDelCon(settings):
                                             print('\n\n\nJust Created Folder: ', main + tvName[0][0])
                                             # move the folder 
                                             shutil.move(dirNewPath, main + tvName[0][0] + '\\' + tvSeriesName)
-                                            print('\n\n\nJust Moved Folder: ', dirNewPath.replace('/', '\\'), 'To > \n', main.replace('/', '\\') + tvName[0][0] + '\\' + tvSeriesName)
+                                            print('\n\n\nJust Moved Folder: ', dirNewPath.replace('/', '\\'), '\nTo > ', main.replace('/', '\\') + tvName[0][0] + '\\' + tvSeriesName)
                                         except:
                                             print('Error With Moving:    \n')
                                 # here if there was only 2 files in the folder then 
@@ -256,7 +256,7 @@ def ReMovDelCon(settings):
                                                     break
                                                 else:
                                                     os.rename(pathForRenameDir, dirNewPath + randomN)
-                                                    print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > \n', tvSeriesName + randomN + '\n')
+                                                    print('\n\n\nJust Renamed Folder: ', dirOldName, '\nTo > ', tvSeriesName + randomN + '\n')
                                                     break
                                             except:
                                                 i += 1
@@ -277,7 +277,7 @@ def ReMovDelCon(settings):
                                     print('No Need To Rename The Image:    \n')
                                 else:
                                     os.rename(oldImage, newImage)
-                                    print('\n\n\nJust Renamed Image: ', imageName, 'To > ', nameForFolder + '.jpg\n')  
+                                    print('\n\n\nJust Renamed Image: ', imageName, '\nTo > ', nameForFolder + '.jpg\n')  
                             except:
                                 print('\nError Renaming The Image:     \n')
                     except:
@@ -304,7 +304,7 @@ def ReMovDelCon(settings):
                                         print('\nNo Need To Rename The Folder.\n')
                                     else:
                                         os.rename(pathForRenameDir, dirNewPath)
-                                        print('\n\n\nJust Renamed Folder: ', dirOldName, 'To > ', nameForFolder + '\n')
+                                        print('\n\n\nJust Renamed Folder: ', dirOldName, '\nTo > ', nameForFolder + '\n')
                                     if settings:
                                         try:
                                             if dirNewPath == main.replace('/', '\\') + nameForFolder:
@@ -312,7 +312,7 @@ def ReMovDelCon(settings):
                                             else:
                                                 try:
                                                     shutil.move(dirNewPath, main)
-                                                    print('\n\n\nJust Moved Folder: ', dirNewPath, 'To > ', main + '\n')
+                                                    print('\n\n\nJust Moved Folder: ', dirNewPath, '\nTo > ', main + '\n')
                                                 except:
                                                     print('Error When Moving:    \n')
                                         except:
