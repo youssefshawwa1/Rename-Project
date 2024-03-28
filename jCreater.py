@@ -70,6 +70,7 @@ def jsonCreater(default):
                 #here you put the api
                                         #here you create a picture from the object api link
                         # print(f"{tvPath}\\{file}\\{file}.jpg")
+                    
                 name = file
                 Details = tvMovieapi(name, '')
                 # if l == 18:
@@ -100,7 +101,7 @@ def jsonCreater(default):
                     except:
                         continue
             except:
-                print('5')
+                print('Eroor!!')
                 continue
             tvsSort = sorted(tvs.items(),key = lambda x:x[1]['last Modified'], reverse=True)
             newTVS = dict()

@@ -54,10 +54,18 @@ def ReMovDelCon(settings):
                             # ensure that the fmovie is false becuase in 
                             # this time we found an episode not a movie
                             fMovie = False
+                            # if the extracted name ends with mp4 or 
+                            # mkv then it will become the name of the folder
+                            isMp4 = re.search('.*.mp4$|.mkv$', findNameandSEandType[0][2])
+                            if isMp4:
+                                fileType = ".mp4"
+                                nameForFolder = isMp4.group()
+                            else:
+                                fileType = findNameandSEandType[0][2]
                             #count how much files
                             varForCounting += 1 
                             #extract the final name 
-                            finalNewName = str(findNameandSEandType[0][0]).title().replace('.', ' ') + str(findNameandSEandType[0][1]).upper()+ str(findNameandSEandType[0][2])
+                            finalNewName = str(findNameandSEandType[0][0]).title().replace('.', ' ') + str(findNameandSEandType[0][1]).upper()+ str(fileType)
                             # if the extracted name ends with mp4 or 
                             # mkv then it will become the name of the folder
                             isMp4 = re.search('.*.mp4$|.mkv$', finalNewName)
@@ -87,17 +95,23 @@ def ReMovDelCon(settings):
                             # the fmovie is true becuase it is a movie that the program found 
                             # will explain why I used fMovie
                             fMovie = True
-                            # extract the final name
-                            finalNewName = str(findMovie[0][0]).title().replace('.', ' ') + str(findMovie[0][1]) + '.' + str(findMovie[0][2])
                             # extention type
                             exType = str(findMovie[0][2])
                             # if the extention of the file was mp4 or 
                             # mkv then the final name will be the folder name
                             if exType == 'mp4':
                                 nameForFolder = str(findMovie[0][0]).title().replace('.', ' ') + str(findMovie[0][1])  
+                                fileType = findMovie[0][1]
                             elif exType == 'mkv':
                                 nameForFolder = str(findMovie[0][0]).title().replace('.', ' ') + str(findMovie[0][1])  
+                                fileType = "mp4"
+                            else:
+                                fileType = findMovie[0][1]
                             # if the old path = the new path then there is no need to rename
+                            # extract the final name
+                            finalNewName = str(findMovie[0][0]).title().replace('.', ' ') + str(findMovie[0][1]) + '.' + str(fileType)
+
+
                             if path + file == path + finalNewName:
                                 SRT2VTT(path, finalNewName)
                                 print('No Need To Rename:   ', file)
